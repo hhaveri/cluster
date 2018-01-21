@@ -1,0 +1,13 @@
+#ifndef BUSCLIENT_GLOBAL_H
+#define BUSCLIENT_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(BUSCLIENT_LIBRARY)
+#  define BUSCLIENT_SHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define BUSCLIENT_SHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // BUSCLIENT_GLOBAL_H
+
