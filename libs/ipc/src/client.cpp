@@ -12,7 +12,7 @@ Client::Client(QObject* parent)
         bool messageReceived(true);
         while (!mClient.atEnd() && messageReceived) {
             // Read incoming message size
-            if (mMessageSize == -1 && mClient.bytesAvailable() >= static_cast<qint64>(sizeof(mMessageSize))) {
+            if (mMessageSize < 0 && mClient.bytesAvailable() >= static_cast<qint64>(sizeof(mMessageSize))) {
                 mClient.read(reinterpret_cast<char*>(&mMessageSize), static_cast<qint64>(sizeof(mMessageSize)));
             }
 

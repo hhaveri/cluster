@@ -1,5 +1,4 @@
 #include "server.h"
-#include <QDataStream>
 #include <QDebug>
 #include <QJsonDocument>
 #include <QLocalSocket>
@@ -24,7 +23,7 @@ Server::Server(QObject* parent)
                     qint64 messageSize(mClientSizeMap.value(client));
 
                     // Read incoming message size
-                    if (messageSize == -1 && client->bytesAvailable() >= static_cast<qint64>(sizeof(messageSize))) {
+                    if (messageSize < 0 && client->bytesAvailable() >= static_cast<qint64>(sizeof(messageSize))) {
                         client->read(reinterpret_cast<char*>(&messageSize), static_cast<qint64>(sizeof(messageSize)));
                         mClientSizeMap[client] = messageSize;
                     }
