@@ -26,6 +26,7 @@ Server::Server(QObject* parent)
                     // Read incoming message size
                     if (messageSize == -1 && client->bytesAvailable() >= static_cast<qint64>(sizeof(messageSize))) {
                         client->read(reinterpret_cast<char*>(&messageSize), static_cast<qint64>(sizeof(messageSize)));
+                        mClientSizeMap[client] = messageSize;
                     }
 
                     // Read & handle message if it is fully available
